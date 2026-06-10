@@ -37,3 +37,8 @@ legacy_business_traffic_classification/src/reproduction/TrafficFormer/
 __pycache__/
 *.py[cod]
 .vscode/
+
+# Office temporary lock files.
+~$*.docx
+~$*.xlsx
+~$*.pptx
