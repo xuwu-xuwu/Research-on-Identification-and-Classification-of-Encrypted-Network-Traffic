@@ -9,7 +9,7 @@ Outputs:
 4) model.joblib
 
 Example:
-python train_baseline.py ^
+python src/baseline/train_baseline.py ^
   --data "data/Scenario B-ARFF/Scenario B-ARFF/TimeBasedFeatures-Dataset-15s-AllinOne.arff" ^
   --label class1
 """
@@ -257,3 +257,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

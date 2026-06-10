@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>后端管理 - 加密方法识别系统</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero admin-hero">
+        <div>
+          <p class="eyebrow">Backend Console</p>
+          <h1>后端管理页面</h1>
+          <p class="hero-copy">
+            查看模型加载、自动路由、实时抓包、系统路径和 API 状态。该页面用于本机实验管理，不建议直接暴露到公网。
+          </p>
+        </div>
+        <div class="status-card">
+          <span class="status-dot" id="adminStatusDot"></span>
+          <div>
+            <strong id="adminStatusText">正在读取后端状态</strong>
+            <p id="adminStatusSub">/api/admin/summary</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="metric-grid" id="adminMetricGrid">
+        <article><span>Model Loaded</span><strong>-</strong></article>
+        <article><span>Fallback</span><strong>-</strong></article>
+        <article><span>Capture</span><strong>-</strong></article>
+        <article><span>Labels</span><strong>-</strong></article>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Model Routing</p>
+            <h2>模型与路由策略</h2>
+          </div>
+          <button id="refreshAdminBtn">刷新状态</button>
+        </div>
+        <div class="admin-grid">
+          <article class="admin-card">
+            <span>当前路由模型</span>
+            <strong id="routeModelName">-</strong>
+          </article>
+          <article class="admin-card">
+            <span>主模型</span>
+            <strong id="primaryModelName">-</strong>
+          </article>
+          <article class="admin-card">
+            <span>Fallback 模型</span>
+            <strong id="fallbackModelName">-</strong>
+          </article>
+          <article class="admin-card">
+            <span>路由规则</span>
+            <strong id="routingPolicy">-</strong>
+          </article>
+        </div>
+        <div class="table-wrap admin-table">
+          <table id="metricTable">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel two-column">
+        <div>
+          <p class="eyebrow">Runtime Paths</p>
+          <h2>运行路径配置</h2>
+          <div id="pathList" class="kv-list"></div>
+        </div>
+        <div>
+          <p class="eyebrow">System Limits</p>
+          <h2>系统限制</h2>
+          <div id="limitList" class="kv-list"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Live Capture</p>
+            <h2>实时抓包管理</h2>
+          </div>
+          <div class="actions">
+            <button class="ghost" id="adminRefreshInterfacesBtn">刷新网卡</button>
+            <button class="ghost" id="adminStopCaptureBtn">停止抓包</button>
+          </div>
+        </div>
+        <div class="live-stats" id="adminCaptureStats"></div>
+        <p class="muted" id="adminCaptureMessage">等待状态加载。</p>
+        <div class="table-wrap compact">
+          <table id="interfaceTable">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel two-column">
+        <div>
+          <p class="eyebrow">Quick Test</p>
+          <h2>快速预测测试</h2>
+          <p class="muted">
+            用一条最小输入测试自动路由。该测试缺失 21 个数值特征，因此应走 fallback 模型。
+          </p>
+          <button id="quickPredictBtn">执行 fallback 测试</button>
+        </div>
+        <div class="result-card" id="quickPredictResult">
+          <span>测试结果会显示在这里</span>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">API Reference</p>
+            <h2>接口速查</h2>
+          </div>
+          <a class="admin-link" href="/">返回预测页面</a>
+        </div>
+        <div class="code-card">
+          <code>GET /api/health</code>
+          <code>GET /api/model/info</code>
+          <code>GET /api/admin/summary</code>
+          <code>POST /api/predict</code>
+          <code>POST /api/predict/csv</code>
+          <code>GET /api/capture/interfaces</code>
+          <code>POST /api/capture/start</code>
+          <code>POST /api/capture/stop</code>
+          <code>GET /api/capture/status</code>
+          <code>GET /api/capture/results</code>
+        </div>
+      </section>
+    </main>
+
+    <script src="/assets/admin.js"></script>
+  </body>
+</html>

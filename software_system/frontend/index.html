@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>加密方法识别系统</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Encrypted Traffic Intelligence</p>
+          <h1>网络流量加密方法识别系统</h1>
+          <p class="hero-copy">
+            基于当前最新的 full enhanced fusion XGBoost 模型，对网络流量进行
+            9 类加密方法与匿名通信机制识别。
+          </p>
+        </div>
+        <div class="status-card">
+          <span class="status-dot" id="statusDot"></span>
+          <div>
+            <strong id="statusText">正在连接后端</strong>
+            <p id="modelName">模型加载中</p>
+            <p><a class="admin-link" href="/admin">进入后端管理</a></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="metric-grid" id="metricGrid">
+        <article><span>Accuracy</span><strong>-</strong></article>
+        <article><span>Macro-F1</span><strong>-</strong></article>
+        <article><span>Weighted-F1</span><strong>-</strong></article>
+        <article><span>Macro Recall</span><strong>-</strong></article>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Live Capture</p>
+            <h2>实时网卡流量预测</h2>
+          </div>
+          <span class="live-pill" id="liveState">未启动</span>
+        </div>
+
+        <div class="live-grid">
+          <label class="field">
+            <span>网卡接口</span>
+            <select id="interfaceSelect">
+              <option value="">请先刷新网卡列表</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>tshark 路径</span>
+            <input id="tsharkPathInput" value="auto" placeholder="例如：auto 或 .\software_system\tools\tshark.exe" />
+          </label>
+          <label class="field">
+            <span>抓包过滤器</span>
+            <input id="captureFilterInput" value="tcp or udp" />
+          </label>
+          <label class="field">
+            <span>流空闲封口秒数</span>
+            <input id="flowIdleInput" type="number" min="1" step="0.5" value="5" />
+          </label>
+          <label class="field">
+            <span>最少包数</span>
+            <input id="minPacketsInput" type="number" min="1" step="1" value="3" />
+          </label>
+          <label class="field">
+            <span>轮询间隔秒数</span>
+            <input id="emitIntervalInput" type="number" min="0.2" step="0.2" value="1" />
+          </label>
+        </div>
+
+        <div class="actions live-actions">
+          <button id="refreshInterfacesBtn">刷新网卡</button>
+          <button id="startCaptureBtn">开始实时预测</button>
+          <button class="ghost" id="stopCaptureBtn" disabled>停止抓取</button>
+          <label class="checkline">
+            <input type="checkbox" id="liveProbabilities" />
+            <span>实时结果包含概率</span>
+          </label>
+        </div>
+
+        <div class="live-stats" id="liveStats">
+          <article><span>已处理包</span><strong>0</strong></article>
+          <article><span>活跃流</span><strong>0</strong></article>
+          <article><span>预测流</span><strong>0</strong></article>
+          <article><span>运行秒数</span><strong>0</strong></article>
+        </div>
+
+        <p class="muted" id="captureMessage">
+          需要本机已安装 Wireshark/tshark，并且当前用户具备抓取该网卡流量的权限。
+        </p>
+
+        <div class="table-wrap compact">
+          <table id="liveTable">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Single Flow</p>
+            <h2>单条流量预测</h2>
+          </div>
+          <button class="ghost" id="fillSampleBtn">填入示例</button>
+        </div>
+
+        <form id="singleForm" class="feature-form">
+          <label class="field span-2">
+            <span class="feature-name">transport</span>
+            <small>传输层协议：TCP / UDP / OTHER</small>
+            <select name="transport" id="transportInput">
+              <option value="TCP">TCP</option>
+              <option value="UDP">UDP</option>
+              <option value="OTHER">OTHER</option>
+            </select>
+          </label>
+
+          <label class="field span-2">
+            <span class="feature-name">sequence_text</span>
+            <small>包序列文本：由方向、包长桶和 IAT 桶组成，可为空</small>
+            <textarea name="sequence_text" id="sequenceInput" rows="3" placeholder="例如：F_LEN_0050 IAT_00000 B_LEN_0100 IAT_00120"></textarea>
+          </label>
+
+          <div id="numericFields" class="numeric-grid span-2"></div>
+
+          <div class="actions span-2">
+            <button type="submit">执行预测</button>
+            <label class="checkline">
+              <input type="checkbox" id="includeProbabilities" />
+              <span>返回各类别概率</span>
+            </label>
+          </div>
+        </form>
+
+        <div class="result-card" id="singleResult">
+          <span>预测结果会显示在这里</span>
+        </div>
+      </section>
+
+      <section class="panel two-column">
+        <div>
+          <p class="eyebrow">Batch CSV</p>
+          <h2>CSV 批量预测</h2>
+          <p class="muted">
+            CSV 至少建议包含 21 个流级特征、`transport` 和可选 `sequence_text`。
+            缺失的数值特征会按训练阶段中位数补齐。
+          </p>
+          <input type="file" id="csvFile" accept=".csv,text/csv" />
+          <div class="actions">
+            <button id="predictCsvBtn">上传并预测</button>
+            <button class="ghost" id="downloadCsvBtn" disabled>下载预测 CSV</button>
+          </div>
+        </div>
+        <div class="code-card">
+          <strong>CSV 示例列</strong>
+          <code>duration,packet_count,byte_count,mean_iat,transport,sequence_text</code>
+          <p>
+            完整示例文件：<span>software_system/examples/sample_records.csv</span>
+          </p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Predictions</p>
+            <h2>预测结果表</h2>
+          </div>
+          <span class="muted" id="resultCount">暂无批量结果</span>
+        </div>
+        <div class="table-wrap">
+          <table id="resultTable">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="/assets/app.js"></script>
+  </body>
+</html>

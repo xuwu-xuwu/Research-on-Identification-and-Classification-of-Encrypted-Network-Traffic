@@ -1,0 +1,205 @@
+{
+  "accuracy": 0.9939781867183223,
+  "f1_macro": 0.8927973081537277,
+  "f1_weighted": 0.9940461607742882,
+  "macro_recall": 0.90989270634284,
+  "class_recalls": {
+    "NON_ENCRYPTED": 0.9970832840644831,
+    "TLS_FAMILY": 0.9974226804123711,
+    "SSH": 0.9989068051380159,
+    "QUIC": 1.0,
+    "VPN": 0.9948927477017364,
+    "TOR": 0.7666666666666667,
+    "I2P": 0.8317460317460318,
+    "FREENET": 0.7083333333333334,
+    "ZERONET": 0.8939828080229226
+  },
+  "classification_report": {
+    "NON_ENCRYPTED": {
+      "precision": 0.9979092702169625,
+      "recall": 0.9970832840644831,
+      "f1-score": 0.9974961061493267,
+      "support": 25371.0
+    },
+    "TLS_FAMILY": {
+      "precision": 0.9974226804123711,
+      "recall": 0.9974226804123711,
+      "f1-score": 0.9974226804123711,
+      "support": 5044.0
+    },
+    "SSH": {
+      "precision": 1.0,
+      "recall": 0.9989068051380159,
+      "f1-score": 0.9994531036368608,
+      "support": 7318.0
+    },
+    "QUIC": {
+      "precision": 0.9811320754716981,
+      "recall": 1.0,
+      "f1-score": 0.9904761904761905,
+      "support": 52.0
+    },
+    "VPN": {
+      "precision": 0.9939902483274747,
+      "recall": 0.9948927477017364,
+      "f1-score": 0.9944412932501419,
+      "support": 8811.0
+    },
+    "TOR": {
+      "precision": 0.7594339622641509,
+      "recall": 0.7666666666666667,
+      "f1-score": 0.7630331753554502,
+      "support": 210.0
+    },
+    "I2P": {
+      "precision": 0.8111455108359134,
+      "recall": 0.8317460317460318,
+      "f1-score": 0.8213166144200627,
+      "support": 315.0
+    },
+    "FREENET": {
+      "precision": 0.4857142857142857,
+      "recall": 0.7083333333333334,
+      "f1-score": 0.576271186440678,
+      "support": 24.0
+    },
+    "ZERONET": {
+      "precision": 0.896551724137931,
+      "recall": 0.8939828080229226,
+      "f1-score": 0.8952654232424677,
+      "support": 349.0
+    },
+    "accuracy": 0.9939781867183223,
+    "macro avg": {
+      "precision": 0.8803666397089764,
+      "recall": 0.90989270634284,
+      "f1-score": 0.8927973081537277,
+      "support": 47494.0
+    },
+    "weighted avg": {
+      "precision": 0.9941375479677965,
+      "recall": 0.9939781867183223,
+      "f1-score": 0.9940461607742882,
+      "support": 47494.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      25297,
+      0,
+      0,
+      0,
+      41,
+      15,
+      5,
+      5,
+      8
+    ],
+    [
+      0,
+      5031,
+      0,
+      1,
+      11,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      6,
+      7310,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      52,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      35,
+      4,
+      0,
+      0,
+      8766,
+      1,
+      1,
+      2,
+      2
+    ],
+    [
+      12,
+      3,
+      0,
+      0,
+      0,
+      161,
+      26,
+      6,
+      2
+    ],
+    [
+      3,
+      0,
+      0,
+      0,
+      0,
+      24,
+      262,
+      3,
+      23
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      5,
+      1,
+      17,
+      1
+    ],
+    [
+      2,
+      0,
+      0,
+      0,
+      1,
+      4,
+      28,
+      2,
+      312
+    ]
+  ],
+  "model_name": "full_enhanced_fusion_xgboost",
+  "method_description": "full-data fusion of flow statistics, transport, and sequence-derived features",
+  "data_dir": "data\\unified_encryption_method_v2_all_data",
+  "samples_train": 221617,
+  "samples_valid": 47490,
+  "samples_test": 47494,
+  "num_features": 41,
+  "source_name_excluded": true,
+  "class_weight_power": 0.5,
+  "xgboost_params": {
+    "n_estimators": 350,
+    "max_depth": 7,
+    "learning_rate": 0.05,
+    "subsample": 0.85,
+    "colsample_bytree": 0.85,
+    "min_child_weight": 2.0,
+    "random_state": 42
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "records": [
+    {
+      "duration": 12.8,
+      "packet_count": 18,
+      "fwd_packet_count": 10,
+      "bwd_packet_count": 8,
+      "byte_count": 3210,
+      "fwd_byte_count": 1880,
+      "bwd_byte_count": 1330,
+      "packets_per_second": 1.406,
+      "bytes_per_second": 250.78,
+      "mean_packet_len": 178.3,
+      "std_packet_len": 44.1,
+      "min_packet_len": 66,
+      "max_packet_len": 420,
+      "mean_iat": 0.75,
+      "std_iat": 0.31,
+      "min_iat": 0,
+      "max_iat": 1.8,
+      "direction_packet_ratio": 1.25,
+      "direction_byte_ratio": 1.41,
+      "avg_packet_size": 178.3,
+      "encrypted_packet_ratio": 1,
+      "transport": "TCP",
+      "sequence_text": "F_LEN_0100 IAT_00000 B_LEN_0150 IAT_00120 F_LEN_0200 IAT_00240 B_LEN_0180 IAT_00300"
+    }
+  ],
+  "include_probabilities": true
+}

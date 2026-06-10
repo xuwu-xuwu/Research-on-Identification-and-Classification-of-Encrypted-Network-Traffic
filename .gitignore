@@ -1,15 +1,39 @@
-# 忽略数据文件夹
-data/
-
-# 如果你还有其他的输出结果文件夹，也可以加上
-outputs/
-
-# 忽略所有的数据集文件格式（保险起见）
+# Large datasets and generated outputs are ignored by default.
 *.arff
 *.pcap
-*.csv
 *.zip
+*.csv
 
-# 忽略系统或编辑器产生的缓存
+# Ignore data/output directories at any project depth.
+**/data/*
+**/outputs/*
+
+# Keep only lightweight runtime metadata needed by the packaged software.
+!data/
+!data/unified_encryption_method_v2_all_data/
+data/unified_encryption_method_v2_all_data/*
+!data/unified_encryption_method_v2_all_data/metadata.json
+
+# Keep the two model artifact directories required by software_system.
+!outputs/
+!outputs/encryption_method/
+outputs/encryption_method/*
+!outputs/encryption_method/full_enhanced_fusion_v1/
+!outputs/encryption_method/full_enhanced_fusion_v1/**
+!outputs/encryption_method/broad_fallback_v1/
+!outputs/encryption_method/broad_fallback_v1/**
+
+# Keep software examples even though CSV files are generally ignored.
+!software_system/examples/*.csv
+
+# Local portable runtime and host-specific config.
+software_system/.venv/
+software_system/.env
+
+# External reproduction repositories kept locally.
+legacy_business_traffic_classification/src/reproduction/TrafficFormer/
+
+# Python/editor caches.
 __pycache__/
+*.py[cod]
 .vscode/

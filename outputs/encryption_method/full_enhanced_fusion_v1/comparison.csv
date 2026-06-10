@@ -1,0 +1,2 @@
+model_name,accuracy,f1_macro,f1_weighted,macro_recall,num_features
+full_enhanced_fusion_xgboost,0.9939781867183223,0.8927973081537277,0.9940461607742882,0.90989270634284,41

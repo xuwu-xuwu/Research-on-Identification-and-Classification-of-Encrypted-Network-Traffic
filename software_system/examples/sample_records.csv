@@ -1,0 +1,4 @@
+duration,packet_count,fwd_packet_count,bwd_packet_count,byte_count,fwd_byte_count,bwd_byte_count,packets_per_second,bytes_per_second,mean_packet_len,std_packet_len,min_packet_len,max_packet_len,mean_iat,std_iat,min_iat,max_iat,direction_packet_ratio,direction_byte_ratio,avg_packet_size,encrypted_packet_ratio,transport,sequence_text
+12.8,18,10,8,3210,1880,1330,1.406,250.78,178.3,44.1,66,420,0.75,0.31,0,1.8,1.25,1.41,178.3,1,TCP,"F_LEN_0100 IAT_00000 B_LEN_0150 IAT_00120 F_LEN_0200 IAT_00240 B_LEN_0180 IAT_00300"
+0.38,6,4,2,520,360,160,15.78,1368.42,86.7,18.2,66,122,0.076,0.042,0,0.15,1.33,2.24,86.7,0,TCP,""
+4.2,11,6,5,1420,810,610,2.619,338.09,129.1,31.6,74,210,0.42,0.18,0,0.92,1.0,1.33,129.1,1,UDP,"F_LEN_0080 IAT_00000 B_LEN_0120 IAT_00080 F_LEN_0140 IAT_00110"
